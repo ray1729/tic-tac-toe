@@ -110,17 +110,18 @@
 (defn play-game
   []
   (let [play-first? (yes-no-prompt "Play first?")
-        player (if play-first? "X" "O")
-        computer (opponent player)]
-    (loop [grid initial-grid to-play (if play-first? player computer)]
+        human (if play-first? "X" "O")
+        computer (opponent human)]
+    (loop [grid initial-grid who-to-play (if play-first? human computer)]
       (print-grid grid)
       (cond
-       (winning-position? grid player) (println "You win.")
+       (winning-position? grid human) (println "You win.")
        (winning-position? grid computer) (println "You lose.")
        (empty? (possible-moves grid)) (println "It's a draw.")
-       :else (if (= to-play player)
-               (recur (make-move grid player (solicit-move player (possible-moves grid))) computer)
-               (recur (make-move grid computer (best-move-for grid computer)) player))))))
+       :else (let [move (if (= who-to-play human)
+                          (solicit-move human (possible-moves grid))
+                          (best-move-for grid computer))]
+               (recur (make-move grid who-to-play move) (opponent who-to-play)))))))
 
 (defn -main []
   (loop []
