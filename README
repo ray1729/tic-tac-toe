@@ -1,0 +1,20 @@
+# tic-tac-toe
+
+A Clojure toy to play tic-tac-toe (noughts and crosses) against a
+simple AI that is guaranteed to win or draw.
+
+## Usage
+
+Compile:
+
+  lein uberjar
+
+Then run:
+
+  java -jar tic-tac-toe-1.0.0-SNAPSHOT-standalone.jar
+
+## License
+
+Copyright (C) 2012 Ray Miller <ray@1729.org.uk>
+
+Distributed under the Eclipse Public License, the same as Clojure.
